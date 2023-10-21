@@ -1,0 +1,59 @@
+site_name: Notes for Games101
+site_url: https://triplepiers.github.io/Games101/
+copyright: Copyright © 2023 SeaBee
+repo_url: https://github.com/triplepiers/Games101
+repo_name: Notes_Collection
+theme:
+  name: material
+  language: zh
+  font:
+    text: LXGW WenKai Screen
+    code: JetBrains Mono
+  palette:
+    scheme: slate
+    accent: amber
+    primary: black
+  icon:
+    repo: fontawesome/brands/github
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/light-bulb-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+  features:
+    - navigation.tabs
+    - navigation.footer
+    - content.code.copy
+    - content.code.annotate  
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+extra:
+  homepage: https://triplepiers.github.io//Games101/
+extra_css:
+  # fonts
+  - https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css
+  - https://gcore.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+nav:
+- Home: index.md
+- Notes:
+  - 1 Transformation: transformation.md

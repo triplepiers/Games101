@@ -1,0 +1,3 @@
+/venv/*
+/docs/.obsidian/*
+.DS_Store
