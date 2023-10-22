@@ -8,3 +8,7 @@
 - Curves & Meshes
 - Ray Tracing
 - Animation & Simulation
+
+!!! tip "笔记中的截图均来自于闫令琪老师的课件"
+
+

@@ -57,3 +57,5 @@ nav:
 - Home: index.md
 - Notes:
   - 1 Transformation: transformation.md
+  - 2 Rasterization: rasterization.md
+  - 3 Shading: shading.md

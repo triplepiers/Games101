@@ -172,6 +172,16 @@ R_{\theta} = \left[
 	\end{array}
 \right]
 $$
+旋转 $-\theta$ (逆运算) 的情况如下：
+
+$$
+R_{-\theta} = \left[
+	\begin{array}{2}
+		cos\theta & sin\theta \\
+		-sin\theta & cos\theta
+	\end{array}
+\right] = R_{\theta}^T = R_{\theta}^{-1}
+$$
 
 ### 1.2 Homogeneous Coordinates
 #### Translation 平移
@@ -384,3 +394,283 @@ $$
 \right)
 $$
 !!! info "应用顺序是 *先线性变换，后平移* （参考形式 $x' = ax + b$）"
+
+### 2.1 3D Affine
+
+#### Scale
+
+$$
+S(s_x,s_y,s_z) = \left(
+	\begin{array}{4}
+		s_x & 0 & 0 & 0 \\
+		0 & s_y & 0 & 0 \\
+		0 & 0 & s_z & 0 \\
+		0 & 0 & 0 & 1
+	\end{array}
+\right)
+$$
+
+#### Translation
+
+$$
+T(t_x,t_y,t_z) = \left(
+	\begin{array}{4}
+		0 & 0 & 0 & t_x \\
+		0 & 0 & 0 & t_y \\
+		0 & 0 & 0& t_z \\
+		0 & 0 & 0 & 1
+	\end{array}
+\right)
+$$
+
+#### Rotation
+
+分别考虑物体绕 x, y, z 轴旋转的情况（对应坐标不变）：
+> 由于 $y = z \times x = - (x \times z)$ ，所以绕 y 轴旋转的矩阵略有不同
+
+$$
+\begin{align*}
+	R_x(\alpha) &=  \left(
+		\begin{array}{4}
+			1 & 0 & 0 & 0 \\
+			0 & cos\alpha & -sin\alpha & 0 \\
+			0 & sin\alpha & cos\alpha & 0 \\
+			0 & 0 & 0 & 1
+		\end{array}
+	\right) \\
+	R_y(\alpha) &=  \left(
+		\begin{array}{4}
+			cos\alpha & 0 & sin\alpha & 0 \\
+			0 & 1 & 0 & 0 \\
+			-sin\alpha & 0 & cos\alpha & 0 \\
+			0 & 0 & 0 & 1
+		\end{array}
+	\right) \\
+	R_z(\alpha) &=  \left(
+		\begin{array}{4}
+			cos\alpha & -sin\alpha & 0 & 0 \\
+			sin\alpha & cos\alpha& 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1
+		\end{array}
+	\right)
+\end{align*}
+$$
+
+如果我们需要物体沿多个轴旋转 => 那么转三次就行了 hhhh
+> 这玩意儿也被称作 *Euler Angles*，等价于位姿描述中的 roll, pitch & yaw
+
+$$
+R_{xyz}(\alpha,\beta,\gamma) = R_x(\alpha) \cdot R_y(\beta) \cdot R_z(\gamma)
+$$
+
+!!! info "Rodrigues' Rotation Formula"
+	围绕轴 $\vec{n}$，旋转角 $\alpha$ 的结果可以写为如下形式：
+	> 此处的 $\vec{n}$ 表示任意方向（可以被分解到 $x,y,z$ 方向）
+	> 
+	> 我们默认旋转轴 $\vec{n}$ *经过原点*，即旋转操作 <u>绕原点进行</u>
+	
+	$$
+	R(\vec{n},\alpha) = cos\alpha \cdot \vec{I} + (1-cos\alpha)\vec{n}\vec{n}^T +sin\alpha \cdot \left(
+		\begin{array}{3}
+			0 & -n_z & n_y \\
+			n_z & 0 & -n_x \\
+			-n_y & n_x & 0
+		\end{array}
+	\right)
+	$$
+
+
+### 2.2 View / Camera 视图
+
+- 定义相机位姿的三要素
+  
+	1. Position $\vec{e}$ ：描述相机位于三维空间中的哪一点
+	2. Look-at Direction $\hat{g}$：描述相机在 360 度中的朝向
+	3. Up Direction $\hat{t}$：描述相机的仰角
+
+#### $M_{view}$
+
+如果我们沿着相同的向量移动物体和相机，将得到和原先一致的观测结果
+
+!!! tip "为什么不让相机保持在 $(0,0,0)$ + look at $-Z$ 方向 + up at $+Y$ 方向，然后去挪动所有的物体呢？"
+
+我们将描述相机从原位姿变换为标准位姿的过程记为 $M_{view}$，它包含以下几步：
+
+1. 将相机 <u>平移</u> 至原点
+2. 将 $\hat{g}$ 旋转至 $-Z$ 方向
+3. 将 $\hat{t}$ 旋转至 $+Y$ 方向
+4. 将 $(\hat{g} \times \hat{t})$ 旋转至 $+X$ 方向
+
+将 Step 1 所用的平移矩阵记为 $T_{view}$，Step 2-4 所有的(合成)旋转矩阵记为 $R_{view}$，不难得出 $M_{view} = R_{view} \cdot T_{view}$：
+
+- 我们可以方便的写出平移矩阵：
+
+	$$
+	T_{view} = \left[
+		\begin{array}{4}
+			1 & 0 & 0 & -x_e \\
+			0 & 1 & 0 & -y_e \\
+			0 & 0 & 1 & -z_e \\
+			0 & 0 & 0 & 1
+		\end{array}
+	\right]
+	$$
+
+- 旋转部分，我们先考虑 $X \rightarrow (g \times t),\ Y \rightarrow t,\ Z \rightarrow -g$，然后取逆矩阵（刚好是转置）
+
+	$$
+	R_{view}^{-1} = \left[
+		\begin{array}{4}
+			x_{g \times t} & x_t & x_{-g} & 0 \\
+			y_{g \times t} & y_t & y_{-g} & 0 \\
+			z_{g \times t} & z_t & z_{-g} & 0 \\
+			0 & 0 & 0 & 1
+		\end{array}
+	\right]
+	$$
+	$$
+	\Rightarrow R_{view} = (R_{view}^{-1})^{-1} = (R_{view}^{-1})^T =\ ...
+	$$
+
+### 2.3 Projection 投影
+
+#### 1 Orthographic 正交
+> 三步走
+
+1. 把相机放到 $(0,0,0)$， look at $-Z$, up at $+Y$（很熟悉）
+2. *丢掉 Z 轴坐标*（暂时不考虑前后遮盖问题）
+3. 将结果等比放缩至 $[-1,1]^2$ 围成的正方形范围中
+
+---
+下面是一个更正式的做法：
+
+- （用 $x,y,z$ 轴坐标范围）定义空间中的一个 长方体(cuboid) $[l,r] \times [b,t] \times [f,n]$
+- 将立方体的 *中心* <u>平移</u> 至 $(0,0,0)$
+- 将长方体 <u>放缩</u> 至 标准立方体(Canonical Cube) $[-1,1]^3$
+
+> 由于相机 look at $-Z$ 方向，所以 *近处* 的物体将具有 *更大的 $Z$ 坐标*（使用左手系时结果相反）
+
+
+我们可以写出上述过程对应的变换矩阵 $M_{ortho} = R \cdot T$：
+
+1. 平移 $\frac{top+bot}{2}$ 的距离
+2. 边长放缩至 2（ $-1 \to 1$ 的距离）
+
+$$
+M_{ortho} = \left[
+	\begin{array}{4}
+		\frac{2}{r-l} & 0 & 0 & 0 \\
+		0 & \frac{2}{t-b} & 0 & 0 \\
+		0 & 0 & \frac{2}{n-f} & 0 \\
+		0 & 0 & 0 & 1
+	\end{array}
+\right] \left[
+	\begin{array}{4}
+		1 & 0 & 0 & -\frac{r+l}{2}\\
+		0 & 1 & 0 & -\frac{t+b}{2}\\
+		0 & 0 & 1 & -\frac{n+f}{2}\\
+		0 & 0 & 0 & 1
+	\end{array}
+\right]
+$$
+#### 2 Perspective 透视
+> 近大远小，（几何）平行线不再平行（延长后相较于消失点）
+
+![截屏2023-10-22 00.23.27.png](https://img1.imgtp.com/2023/10/22/03Whmlvf.png)
+
+透视投影的可视空间是一个 视锥（Frustum），我们可以分两步走：
+
+1. Squish the *frustum* into a *cuboid*（转换为正交投影）   
+2. 进行一次正交投影
+
+!!! question "如何描述一个 Frustum ？"
+	Vertical **field-of-view** (fovY) + **aspect ratio**（定义了底面和顶角）
+	> 其中 fovY 为 相机 与 窗口上下底边中点 连线所形成的夹角
+	
+	<div style="width:100%; display:flex; justify-content:center;">
+		<img src="https://img1.imgtp.com/2023/10/22/X4bk6Fxb.png" style="width:350px;">
+	</div>
+#### Squish
+
+![截屏2023-10-22 00.29.35.png](https://img1.imgtp.com/2023/10/22/asDdrxdB.png)
+
+??? info "使用 fovY + aspect ratio 描述的情况"
+	![截屏2023-10-22 14.09.09.png](https://img1.imgtp.com/2023/10/22/GFIlQivz.png)
+
+设挤压过程为 $(x,y,z) \rightarrow (x',y',n)$，有：
+> 其中 $n$ 为未知数
+
+$$
+\left\{
+	\begin{align*}
+		y' &= \frac{n}{z}y \\
+		x' &= \frac{n}{z}x
+	\end{align*}
+\right.
+$$
+
+将变换前后的坐标写成齐次形式，有：
+
+$$
+\left(
+	\begin{array}{1}
+		x \\ y \\ z \\ 1
+	\end{array}
+\right) \Rightarrow \left(
+	\begin{array}{1}
+		\frac{nx}{z} \\ \frac{ny}{z} \\ \text{unknown} \\ 1
+	\end{array}
+\right) = \left(
+	\begin{array}{1}
+		nx \\ ny \\ \text{unknown} \\ z
+	\end{array}
+\right)
+$$
+我们可以填出 $M_{persp \rightarrow ortho}$ 中的部分值：
+
+$$
+M_{persp \rightarrow ortho} = \left[
+	\begin{array}{4}
+		n & 0 & 0 & 0 \\
+		0 & n & 0 & 0 \\
+		? & ? & ? & ? \\
+		0 & 0 & 1 & 0
+	\end{array}
+\right]
+$$
+
+又因为：
+
+- 最近平面上的所有点 (所有)坐标 在挤压前后 *不变*
+
+	$$
+\left(
+	\begin{array}{1}
+		x \\ y \\ n \\ 1
+	\end{array}
+\right) = \left(
+	\begin{array}{1}
+		nx \\ ny \\ n^2 \\ n
+	\end{array}
+\right) \Rightarrow [?,?,?,?] = [0,0,A,B] \ and \ An + B = n^2
+$$
+
+- 最远平面上的所有点 $Z$坐标 在挤压前后 *不变*
+
+	我们取特例 —— 中心点 $(0,0,f)$ => 挤压后还是 $(0,0,f)$
+	
+	$$
+\left(
+	\begin{array}{1}
+		0 \\ 0 \\ f \\ 1
+	\end{array}
+\right) = \left(
+	\begin{array}{1}
+		0 \\ 0 \\ f^2 \\ f
+	\end{array}
+\right) \Rightarrow Af + B = f^2
+$$
+
+
+可以解得 $A,B$ 并补全 $M_{persp \rightarrow ortho}$
