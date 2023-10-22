@@ -1,0 +1,1263 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://triplepiers.github.io/Games101/rasterization/">
+      
+      
+        <link rel="prev" href="../transformation/">
+      
+      
+        <link rel="next" href="../shading/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
+    
+    
+      
+        <title>2 Rasterization - Notes for Games101</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.35e1ed30.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=LXGW+WenKai+Screen:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"LXGW WenKai Screen";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css">
+    
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="amber">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-triangles" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="https://triplepiers.github.io//Games101/" title="Notes for Games101" class="md-header__button md-logo" aria-label="Notes for Games101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notes for Games101
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2 Rasterization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/triplepiers/Games101" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../transformation/" class="md-tabs__link">
+          
+  
+  Notes
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://triplepiers.github.io//Games101/" title="Notes for Games101" class="md-nav__button md-logo" aria-label="Notes for Games101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Notes for Games101
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/triplepiers/Games101" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Notes_Collection
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Notes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transformation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 Transformation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2 Rasterization
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    2 Rasterization
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-triangles" class="md-nav__link">
+    1 Triangles 三角形光栅化
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Triangles 三角形光栅化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sampling" class="md-nav__link">
+    Sampling 采样
+  </a>
+  
+    <nav class="md-nav" aria-label="Sampling 采样">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#point-in-triangle-test" class="md-nav__link">
+    Point-in-Triangle Test
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-antialiasing" class="md-nav__link">
+    2 Antialiasing 反走样
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Antialiasing 反走样">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-sampling-theory" class="md-nav__link">
+    2.1 Sampling Theory
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Sampling Theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fourier-transform" class="md-nav__link">
+    Fourier Transform 傅立叶级数展开
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    Filtering 滤波
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sampling_1" class="md-nav__link">
+    Sampling 采样
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-sampling-artifacts-in-cg" class="md-nav__link">
+    2.2 Sampling Artifacts in CG
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-blurring-pre-filtering-before-sampling" class="md-nav__link">
+    2.3 Blurring (Pre-Filtering) before sampling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 实践
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-increase-sampling-rate" class="md-nav__link">
+    1 Increase sampling rate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-antialiasing_1" class="md-nav__link">
+    2 Antialiasing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-supersampling-msaa" class="md-nav__link">
+    3 Supersampling (MSAA)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-visibility-occlusion" class="md-nav__link">
+    3 Visibility / Occlusion 可见性与遮挡
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Visibility / Occlusion 可见性与遮挡">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-painters-algorithm" class="md-nav__link">
+    3.1 Painter's Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-z-buffering" class="md-nav__link">
+    3.2 Z-Buffering 深度缓存
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 Shading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-triangles" class="md-nav__link">
+    1 Triangles 三角形光栅化
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Triangles 三角形光栅化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sampling" class="md-nav__link">
+    Sampling 采样
+  </a>
+  
+    <nav class="md-nav" aria-label="Sampling 采样">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#point-in-triangle-test" class="md-nav__link">
+    Point-in-Triangle Test
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-antialiasing" class="md-nav__link">
+    2 Antialiasing 反走样
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Antialiasing 反走样">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-sampling-theory" class="md-nav__link">
+    2.1 Sampling Theory
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Sampling Theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fourier-transform" class="md-nav__link">
+    Fourier Transform 傅立叶级数展开
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    Filtering 滤波
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sampling_1" class="md-nav__link">
+    Sampling 采样
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-sampling-artifacts-in-cg" class="md-nav__link">
+    2.2 Sampling Artifacts in CG
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-blurring-pre-filtering-before-sampling" class="md-nav__link">
+    2.3 Blurring (Pre-Filtering) before sampling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 实践
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-increase-sampling-rate" class="md-nav__link">
+    1 Increase sampling rate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-antialiasing_1" class="md-nav__link">
+    2 Antialiasing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-supersampling-msaa" class="md-nav__link">
+    3 Supersampling (MSAA)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-visibility-occlusion" class="md-nav__link">
+    3 Visibility / Occlusion 可见性与遮挡
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Visibility / Occlusion 可见性与遮挡">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-painters-algorithm" class="md-nav__link">
+    3.1 Painter's Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-z-buffering" class="md-nav__link">
+    3.2 Z-Buffering 深度缓存
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>2 Rasterization</h1>
+
+<p>在经过 MVP(Model + View + Projection) 变换后，所有的物体将被归约至 <span class="arithmatex">\([-1,1]^3\)</span> 的 Canonical Cube 中。我们接下来的任务便是通过 <em>光栅化(Rasterization)</em> 将其绘制到屏幕上。</p>
+<blockquote>
+<p>在图形学中，我们认为 screen 就是一个由 pixel 构成的二维数组。</p>
+</blockquote>
+<details class="info">
+<summary>Screen Space</summary>
+<blockquote>
+<p>本课程中的定义和 Tiger Book 中稍微有一些出入</p>
+</blockquote>
+<ul>
+<li>屏幕坐标系<ul>
+<li>我们以 <u>左下角</u> 为屏幕坐标系的原点</li>
+<li><span class="arithmatex">\(+X\)</span> 方向水平向右，<span class="arithmatex">\(+Y\)</span> 方向竖直向上</li>
+</ul>
+</li>
+<li>像素坐标<ul>
+<li>我们使用 <span class="arithmatex">\(\{(x,y) | x,y \in \mathbf{N}, x \lt width, y \lt height\}\)</span> 来描述像素坐标</li>
+<li>每个像素（方格）的中心位于 <span class="arithmatex">\((x+0.5, y+0.5)\)</span></li>
+</ul>
+</li>
+</ul>
+<p><div style="width:100%;display:flex;justify-content:center;">
+    <img src="https://img1.imgtp.com/2023/10/22/RN1updWB.png" style="width:300px;">
+</div></p>
+</details>
+<ul>
+<li>
+<p>从 Canonical Cube 到 Screen</p>
+<p>由于这个过程与 <span class="arithmatex">\(Z\)</span>轴 坐标无关，所以我们要做的实际上是将 <span class="arithmatex">\(XY\)</span>平面 <span class="arithmatex">\([-1,1]^2\)</span> 拉伸到屏幕平面 <span class="arithmatex">\([0,width]\times[0,height]\)</span> </p>
+<p>=&gt; 我们通过一个 <span class="arithmatex">\(M_{viewport}\)</span> 变换来实现</p>
+<blockquote>
+<p>先<u>放缩</u>到对应大小，然后将左下角<u>平移</u>至 <span class="arithmatex">\((0,0,0)\)</span></p>
+</blockquote>
+<div class="arithmatex">\[
+M_{viewport} = \left(
+    \begin{array}{4}
+        \frac{width}{2} &amp; 0 &amp; 0 &amp; \frac{width}{2}\\
+        0 &amp; \frac{height}{2} &amp; 0 &amp; \frac{height}{2}\\
+        0 &amp; 0 &amp; 1 &amp; 0\\
+        0 &amp; 0 &amp; 0 &amp; 1
+    \end{array}
+\right)
+\]</div>
+</li>
+</ul>
+<h2 id="1-triangles">1 Triangles 三角形光栅化</h2>
+<div class="admonition question">
+<p class="admonition-title">为什么选用三角形面片？</p>
+</div>
+<ul>
+<li>Triangle as Fundamental Shape Primitives<ul>
+<li>三角形是最简单的多边形 —— 我们可以把任意多边形拆分为若干三角形</li>
+<li>三角形 <em>一定是平面的</em></li>
+<li>三角形的 内外 划分十分清晰（不存在凹凸多边形问题）</li>
+<li>
+<p>定义三个顶点的属性后，非常容易在其内部做过渡插值</p>
+<p>Well-defined method for interpolating values at vertices over triangle(barycentric interpolation)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="sampling">Sampling 采样</h3>
+<div class="admonition question">
+<p class="admonition-title">Pixel Approximate：如何用像素描述一个三角形？</p>
+</div>
+<ul>
+<li>
+<p>Sampling</p>
+<ul>
+<li>给出一个 <em>连续函数</em>，求其在特定位置的值。</li>
+<li>We can <em>discretize</em> a function by sampling.</li>
+</ul>
+<div class="highlight"><span class="filename">f(x) 是一个连续函数，下面是一个采样过程</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">max_x</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">output</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<h4 id="point-in-triangle-test">Point-in-Triangle Test</h4>
+<p>对于给定的三角形，我们可以对 <u>Pixel Center is inside Triangle</u> 的像素点进行采样：</p>
+<div style="width:100%;display:flex;justify-content:center;">
+    <img src="https://img1.imgtp.com/2023/10/22/kLrR5V7O.png" style="width:400px;">
+</div>
+
+<p>可以使用函数 <code>inside(tri, x, y)</code> 进行描述：</p>
+<div class="arithmatex">\[
+inside(tri,x,y) = \left\{
+    \begin{align*}
+    1&amp;, (x,y) \ \text{in triangle tri} \\
+    0&amp;, \text{otherwise}
+    \end{align*}
+\right.
+\]</div>
+<p>如果采用 binary image，我们可以使用如下函数获得光栅化结果：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">image</span><span class="p">[</span><span class="n">X_MAX</span><span class="p">][</span><span class="n">Y_MAX</span><span class="p">];</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">X_MAX</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">Y_MAX</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inside</span><span class="p">(</span><span class="n">tri</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">+</span><span class="mf">0.5</span><span class="p">);</span><span class="w"> </span><span class="c1">// 判断像素中心是否处于界内</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
+</code></pre></div>
+<details class="info">
+<summary>使用 Cross Product 判断点是否处于三角形内</summary>
+<p><div style="width:100%;display:flex;justify-content:center;">
+    <img src="https://img1.imgtp.com/2023/10/22/HlPl9av0.png" style="width:400px;">
+</div></p>
+<p>通过 <span class="arithmatex">\(\vec{P_0P_1} \times \vec{P_0Q},\vec{P_1P_2} \times \vec{P_1Q},\vec{P_2P_0} \times \vec{P_2Q}\)</span> 三次叉乘，我们可以判断 <span class="arithmatex">\(Q\)</span> 处于 7分 空间的那一份中</p>
+<p>当切仅当<u>三次叉乘结果符号相同</u>时，<span class="arithmatex">\(Q\)</span> 处于三角形内</p>
+</details>
+<div class="admonition info">
+<p class="admonition-title">Edge Class</p>
+<p>当像素中心 <em>刚好处于图形边缘线</em> 上时，应该做统一处理。</p>
+<blockquote>
+<p>本课程中统一忽略这些点</p>
+</blockquote>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Bounding Box</p>
+<p>我们显然不需要判断 <em>屏幕上所有的 pixel</em> 是否落在三角形内（位置超过上下界的像素点显然没有判断的意义）</p>
+<p>=&gt; 只需要判断落在 (Axis-Aligned) Bounding Box 内的 pixel 即可：</p>
+<ul>
+<li><code>X_MIN = min(P0_X, P1_X, P2_X), X_MAX = max(P0_X, P1_X, P2_X);</code></li>
+<li><code>Y_MIN, Y_MAX</code> 同理</li>
+</ul>
+<p><div style="width:100%;display:flex;justify-content:center;">
+    <img src="https://img1.imgtp.com/2023/10/22/8xlMhy7L.png" style="width:350px;">
+</div></p>
+<p>对于 瘦长/旋转后 的三角形，我们可以对 <em>每一行</em> 取 MIN-MAX 进行判断：</p>
+<p><div style="width:100%;display:flex;justify-content:center;">
+    <img src="https://img1.imgtp.com/2023/10/22/cap3fayA.png" style="width:350px;">
+</div></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Sampling 会导致 aliasing =&gt; 具体表现为 <em>锯齿 jaggies</em>（我们会在下面进行讨论）</p>
+</div>
+<h2 id="2-antialiasing">2 Antialiasing 反走样</h2>
+<h3 id="21-sampling-theory">2.1 Sampling Theory</h3>
+<h4 id="fourier-transform">Fourier Transform 傅立叶级数展开</h4>
+<p>任何一个周期函数都可以写成 <em>一系列</em> <span class="arithmatex">\(cos,\ sin\)</span>  的线性组合（当然还有常数项）</p>
+<p>=&gt; Fourier Transform 将信号分为 frequencies（将信号从时域变换至频域）</p>
+<p><img alt="截屏2023-10-22 16.16.27.png" src="https://img1.imgtp.com/2023/10/22/spdPF66N.png" /></p>
+<hr />
+<div class="admonition info">
+<p class="admonition-title">Higher Frequencies need Faster Sampling</p>
+</div>
+<p><img alt="截屏2023-10-22 16.19.20.png" src="https://img1.imgtp.com/2023/10/22/Yt94WyKN.png" /></p>
+<p>我们可以对分解得到的正余弦波进行采样，然后通过连线去近似：</p>
+<ul>
+<li>在频率较低的正弦波中，这一方法具有较好的结果</li>
+<li>
+<p>但在频率较高的正弦波中（如 <span class="arithmatex">\(f_5(x)\)</span>），效果十分糟糕</p>
+<p>事实上，这可能导致 <em>高频信号</em> 与 <em>低频信号</em> 呈现相同的采样结果（下图中的 蓝/黑 信号在该采样频率下的表现完全一致）
+<img alt="截屏2023-10-22 16.24.00.png" src="https://img1.imgtp.com/2023/10/22/jyAk8CVf.png" /></p>
+</li>
+</ul>
+<h4 id="filtering">Filtering 滤波</h4>
+<div class="admonition notes">
+<p class="admonition-title">角度A：<u>Get rid of</u> certain frequency contents.</p>
+</div>
+<p>事实上，大多数有意义的信息都集中在 <em>低频</em> 区域</p>
+<ol>
+<li>
+<p>Filter out <em>low frequency</em>（高通滤波）</p>
+<p>得到的结果是 Edges =&gt; 边界是信号发生 <em>突变</em> 的区域</p>
+</li>
+<li>
+<p>Filter out <em>high frequency</em> （低通滤波）</p>
+<p>使图像模糊 =&gt; 因为边界被丢掉了</p>
+</li>
+<li>
+<p>Filter out <em>low &amp; high frequency</em> </p>
+<p>提取不太明显的边界特征 =&gt; 最明显的边界 &amp; 大规模相似的填充被丢掉了</p>
+</li>
+</ol>
+<div class="admonition notes">
+<p class="admonition-title">角度B：Convolution (卷积) / Averaging</p>
+</div>
+<ul>
+<li>
+<p>Convolution Theorem</p>
+<p>时域上的卷积结果 = 频域上的乘积</p>
+</li>
+</ul>
+<p>所以当我们希望对一个信号进行卷积操作时，有两种方案：</p>
+<ol>
+<li>
+<p>直接对 Spatial Domain (原信号) 进行卷积操作</p>
+</li>
+<li>
+<p>从 "频域上的乘积" 角度出发：</p>
+<ol>
+<li>使用 Fourier Transform 将原信号转换至 Frequency Domain</li>
+<li>将结果与 convolution kernel 的 Fourier Transform 结果相乘</li>
+<li>使用 inverse Fourier 将乘积转换会 Spatial Domain</li>
+</ol>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Blur (Box Filter) 操作的两种实现</p>
+</div>
+<p><img alt="截屏2023-10-22 16.43.59.png" src="https://img1.imgtp.com/2023/10/22/G22oaX6m.png" /></p>
+<details class="info">
+<summary>Box Filter (Low Pass)</summary>
+<p>上图中采用的卷积核也被称为 Box Filter</p>
+<ul>
+<li>开头的 <span class="arithmatex">\(\frac{1}{9}\)</span> 是为了对结果进行归一化，避免亮度上的问题</li>
+<li>模糊：其 Fourier Transform 的结果集中在 <em>低频</em> 区域 =&gt; 相乘后保留低频部分</li>
+<li><em>wider kernel</em> (3 x 3) 在频域上对应了 <em>lower frequency</em> =&gt; 更加模糊</li>
+</ul>
+</details>
+<h4 id="sampling_1">Sampling 采样</h4>
+<blockquote>
+<p>Repeating Frequency Contents</p>
+</blockquote>
+<ul>
+<li>
+<p>在时域上</p>
+<p>Sampling = <span class="arithmatex">\(f(x) \times \text{冲击函数}\)</span></p>
+</li>
+<li>
+<p>在频域上</p>
+<p>Sampling =  <span class="arithmatex">\(f(x) \text{和冲击函数的卷积}\)</span></p>
+<p>=&gt; 以冲击函数频率为间隔 <em>复制粘贴</em> <span class="arithmatex">\(f(x)\)</span> 的频谱</p>
+<div class="admonition danger">
+<p class="admonition-title">采样频率低时，频谱之间的 <em>交叠</em> 导致了 走样 (Aliasing)</p>
+</div>
+</li>
+</ul>
+<p><img alt="截屏2023-10-22 16.57.52.png" src="https://img1.imgtp.com/2023/10/22/npCrWqZH.png" /></p>
+<h3 id="22-sampling-artifacts-in-cg">2.2 <em>Sampling</em> Artifacts in CG</h3>
+<div class="admonition info">
+<p class="admonition-title">其根本原因是 信号变化频率 &gt; 采样频率</p>
+</div>
+<ul>
+<li>
+<p>锯齿 Jaggies (Staircase Pattern)</p>
+</li>
+<li>
+<p>摩尔纹 Moire Patterns</p>
+<p>在忽略原图的 odd rows &amp; columns 后产生</p>
+</li>
+<li>
+<p>Wagon Wheel Illusion (False Motion)</p>
+<p>由于人眼采样频率低于运动速度而产生</p>
+</li>
+</ul>
+<h3 id="23-blurring-pre-filtering-before-sampling">2.3 Blurring (Pre-Filtering) <em>before</em> sampling</h3>
+<p>以三角形光栅化为例：</p>
+<ul>
+<li>对 binary image 采样会导致锯齿：像素非黑即白</li>
+<li>但对原图进行 blur 后进行采样，使得像素内容可以取一些 intermediate value 就可以一定程度上实现抗锯齿</li>
+</ul>
+<p><img alt="截屏2023-10-22 16.06.25.png" src="https://img1.imgtp.com/2023/10/22/z5ioM04t.png" /></p>
+<div class="admonition danger">
+<p class="admonition-title">Sample <em>then filter</em> (Blurred Aliasing) 是不可行的！</p>
+</div>
+<h3 id="22">2.2 实践</h3>
+<h4 id="1-increase-sampling-rate">1 Increase sampling rate</h4>
+<blockquote>
+<p>天下武功唯快不破</p>
+</blockquote>
+<ul>
+<li>提高采样频率增加了频域中 replicas 之间的距离 =&gt; 避免了交叠，解决了走样</li>
+<li>但事实上屏幕分辨率是固定的（我们不可能通过迫害使一块 1080p 的屏幕直接飞升到 4k）</li>
+</ul>
+<h4 id="2-antialiasing_1">2 Antialiasing</h4>
+<blockquote>
+<p>一个典型实现是 Filter out <em>HIGH</em> frequencies before filtering</p>
+</blockquote>
+<p>本质上使得 Fourier Contents <u>在 repeat 前变得更窄</u> =&gt; 避免了交叠</p>
+<blockquote>
+<p>是 chop，不是放缩 orz</p>
+</blockquote>
+<p>在实践中，我们采用 1-pixel-width Box Filter 进行模糊操作：</p>
+<blockquote>
+<p>把部分覆盖的颜色平均到整个像素中</p>
+</blockquote>
+<p><img alt="截屏2023-10-22 17.11.22.png" src="https://img1.imgtp.com/2023/10/22/PL2PUTuF.png" /></p>
+<h4 id="3-supersampling-msaa">3 Supersampling (MSAA)</h4>
+<blockquote>
+<p>只是对模糊操作的一个近似，将 单个像素 划分为 <span class="arithmatex">\(n \times n\)</span> 的 <span class="arithmatex">\(n^2\)</span> 宫格</p>
+</blockquote>
+<p>在采样时：</p>
+<ol>
+<li>单独考虑 <span class="arithmatex">\(n^2\)</span> 个格子是否处于三角形内</li>
+<li>使用 <span class="arithmatex">\(\frac{N_{in}}{n^2}\)</span> 作为 整个像素点 的 blur 结果</li>
+</ol>
+<div class="admonition danger">
+<p class="admonition-title">但是 MSAA 增大了计算量 =&gt; 翻了 <span class="arithmatex">\(n^2\)</span> 倍（不太妙）</p>
+</div>
+<hr />
+<p>其他的抗锯齿方案还有：</p>
+<ul>
+<li>FXAA (Fast Approximate AA)：通过图像匹配后期将锯齿边界替换为曲线</li>
+<li>TAA (Temporal AA)：复用上一帧的感知结构</li>
+</ul>
+<h2 id="3-visibility-occlusion">3 Visibility / Occlusion 可见性与遮挡</h2>
+<h3 id="31-painters-algorithm">3.1 Painter's Algorithm</h3>
+<div class="admonition tip">
+<p class="admonition-title">Overwrite</p>
+<p>先画远处的物品，再画近处的物品（然后就被正确覆盖了）</p>
+</div>
+<p>存在的问题：</p>
+<ul>
+<li>
+<p>需要对各个面片的 depth 进行排序，复杂度为 <span class="arithmatex">\(O(n \log n)\)</span></p>
+</li>
+<li>
+<div class="admonition danger">
+<p class="admonition-title">Can have UNresolvable depth order</p>
+<ul>
+<li>面片之间相互交叠
+    <div style="width:100%;display:flex;justify-content:center;">
+            <img src="https://img1.imgtp.com/2023/10/22/GDE8hQtC.png" style="width:350px;">
+        </div></li>
+<li>其他的例子还有立方体的侧面：左右两面和上下两面谁更 “近” 呢？</li>
+</ul>
+</div>
+</li>
+</ul>
+<h3 id="32-z-buffering">3.2 Z-Buffering 深度缓存</h3>
+<div class="admonition tip">
+<p class="admonition-title">既然我们没法决定 <em>triangle</em> 的远近顺序，那么为什么不以 <em>pixel</em> 为基本单位进行考虑呢？</p>
+</div>
+<p>该算法需要用一个额外（与 image 等大）的 buffer 存储每个 pixel 的 current MIN z-value 值，并最终产出：</p>
+<ul>
+<li>frame buffer 中存储的，具有正确覆盖关系的 color value</li>
+<li>depth buffer 中存储的，每个 pixel 的 depth value</li>
+</ul>
+<blockquote>
+<p>为了处理的方便性，我们假设 <span class="arithmatex">\(depth \gt 0\)</span>，并且 <span class="arithmatex">\(\text{smaller depth} \rightarrow \text{closer}\)</span></p>
+</blockquote>
+<div class="highlight"><span class="filename">Z-Buffer Algorithm</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// During rasterization</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">for</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">triangle</span><span class="w"> </span><span class="n">T</span><span class="o">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">pixel</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">T</span><span class="o">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">zbuffer</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span><span class="o">:</span><span class="w">        </span><span class="c1">// 截至目前 最近 的 pixel</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">            </span><span class="n">framebuffer</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rgb</span><span class="p">;</span><span class="w"> </span><span class="c1">// 更新该点的 color</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">            </span><span class="n">zbuffer</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">       </span><span class="c1">// 更新该点的 min-depth</span>
+</code></pre></div>
+<p>时间复杂度：<span class="arithmatex">\(O(n)\)</span> =&gt; 对于 n 个 triangle 而言（不需要排序）</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../transformation/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 1 Transformation">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                1 Transformation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../shading/" class="md-footer__link md-footer__link--next" aria-label="下一页: 3 Shading">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                3 Shading
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2023 SeaBee
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
