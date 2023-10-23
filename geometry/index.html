@@ -8,26 +8,26 @@
       
       
       
-        <link rel="canonical" href="https://triplepiers.github.io/Games101/">
+        <link rel="canonical" href="https://triplepiers.github.io/Games101/geometry/">
+      
+      
+        <link rel="prev" href="../shading/">
       
       
       
-        <link rel="next" href="transformation/">
-      
-      
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
     
     
       
-        <title>Notes for Games101</title>
+        <title>4 Geometry - Notes for Games101</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.35e1ed30.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.35e1ed30.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.356b1318.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
       
       
   
@@ -91,7 +91,7 @@
     
       <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -116,7 +116,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome" class="md-skip">
+        <a href="#1-representations" class="md-skip">
           跳转至
         </a>
       
@@ -150,7 +150,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              4 Geometry
             
           </span>
         </div>
@@ -228,11 +228,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
         
   
     
@@ -247,11 +245,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="transformation/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../transformation/" class="md-tabs__link">
           
   
   Notes
@@ -311,18 +311,9 @@
       
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -331,7 +322,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -340,6 +330,8 @@
       
   
   
+    
+  
   
     
     
@@ -349,12 +341,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -368,7 +360,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Notes
@@ -381,7 +373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="transformation/" class="md-nav__link">
+      <a href="../transformation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -401,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="rasterization/" class="md-nav__link">
+      <a href="../rasterization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -421,7 +413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="shading/" class="md-nav__link">
+      <a href="../shading/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -439,9 +431,27 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="geometry/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4 Geometry
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -450,6 +460,31 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-representations" class="md-nav__link">
+    1 Representations
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -479,8 +514,21 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-representations" class="md-nav__link">
+    1 Representations
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -498,18 +546,52 @@
   
 
 
-<h1 id="welcome">Welcome</h1>
-<p>这是对 <a href="https://sites.cs.ucsb.edu/~lingqi/index.html">闫令琪</a> 老师与 2020 年春夏开设的 <a href="https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html">现代计算机图形学入门: Games101</a> 课程的学习记录，您可以在 <a href="https://www.bilibili.com/list/watchlater?oid=90798049&amp;bvid=BV1X7411F744">b站</a> 看到完整的课程录播。</p>
-<p>课程将包含对以下四个模块的讨论：</p>
+  <h1>4 Geometry</h1>
+
+<h2 id="1-representations">1 Representations</h2>
 <ul>
-<li>Rasterization</li>
-<li>Curves &amp; Meshes</li>
-<li>Ray Tracing</li>
-<li>Animation &amp; Simulation</li>
+<li>
+<p>Implicit 隐式</p>
+<p>(三维)点坐标满足的关系： <span class="arithmatex">\(f(x,y,z) = 0\)</span></p>
+<blockquote>
+<p>比如球体方程 <span class="arithmatex">\(x^2 + y ^2 + z^2 = 1\)</span></p>
+</blockquote>
+<p>我们很难看着方程说他 <em>是什么</em>，但很容易判断点 <em>在不在/在内外</em> 函数规定的几何体上</p>
+<ul>
+<li>
+<p>Algebra Surface：参数方程（不直观）</p>
+</li>
+<li>
+<p>Constructive Solid Geometry</p>
+<p>对基本几何体进行 Union / Intersection / Difference 操作</p>
+</li>
+<li>
+<p>Signed Distance Functions (SDF)</p>
+<p>描述空间中任何一点到给定几何体的最小距离（可以 <span class="arithmatex">\(\lt 0\)</span>）</p>
+<ul>
+<li>通过对两个几何体的 SDF 进行 blend（类似于场叠加）操作，就可以得到平滑的融合过程</li>
+<li>找到所有 <span class="arithmatex">\(dist = 0\)</span> 的点就可以恢复出立体了 =&gt; 所有 <span class="arithmatex">\(dist\)</span> 相等的点属于同一层平面</li>
 </ul>
-<div class="admonition tip">
-<p class="admonition-title">笔记中的截图均来自于闫令琪老师的课件</p>
-</div>
+</li>
+<li>
+<p>Fractals 分型</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Explicit 显式</p>
+<p>给出所有满足条件的(三维)点坐标 / 参数映射(Parameter Mapping)</p>
+<blockquote>
+<p>后者给你满足条件的 <span class="arithmatex">\((u,v)\)</span> 集合，并定义 <span class="arithmatex">\((u,v) \rightarrow (x,y,z)\)</span> 的映射关系</p>
+</blockquote>
+<p>难以判断给定点在几何体 <em>内外</em></p>
+<ul>
+<li>Point Cloud</li>
+<li>Polygon Mesh</li>
+<li>Subdivision, NURBS</li>
+</ul>
+</li>
+</ul>
 
 
 
@@ -530,22 +612,22 @@
       
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
-        
           
-          <a href="transformation/" class="md-footer__link md-footer__link--next" aria-label="下一页: 1 Transformation">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                下一页
-              </span>
-              <div class="md-ellipsis">
-                1 Transformation
-              </div>
-            </div>
+          <a href="../shading/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 3 Shading">
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                3 Shading
+              </div>
             </div>
           </a>
+        
         
       </nav>
     
@@ -576,10 +658,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="assets/javascripts/bundle.aecac24b.min.js"></script>
+      <script src="../assets/javascripts/bundle.aecac24b.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

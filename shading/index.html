@@ -14,6 +14,8 @@
         <link rel="prev" href="../rasterization/">
       
       
+        <link rel="next" href="../geometry/">
+      
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
@@ -470,19 +472,26 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-blinn-phong-reflectance-model" class="md-nav__link">
-    1 Blinn-Phong Reflectance Model
+  <a href="#11-blinn-phong-reflectance-model" class="md-nav__link">
+    1.1 Blinn-Phong Reflectance Model
   </a>
   
-    <nav class="md-nav" aria-label="1 Blinn-Phong Reflectance Model">
+    <nav class="md-nav" aria-label="1.1 Blinn-Phong Reflectance Model">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#diffuse-reflection" class="md-nav__link">
-    Diffuse Reflection
+  <a href="#111-specular-termbliin-phong" class="md-nav__link">
+    1.1.1 Specular Term(Bliin-Phong)
   </a>
   
-    <nav class="md-nav" aria-label="Diffuse Reflection">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-diffuse-reflection" class="md-nav__link">
+    1.1.2 Diffuse Reflection
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1.2 Diffuse Reflection">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -511,6 +520,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#113-ambient-term" class="md-nav__link">
+    1.1.3 Ambient Term
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-shading-frequency" class="md-nav__link">
+    1.2 Shading Frequency 着色频率
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Shading Frequency 着色频率">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-vertex-normal-vectors" class="md-nav__link">
+    Per-Vertex Normal Vectors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-pixel-normal-vectors" class="md-nav__link">
+    Per-Pixel Normal Vectors
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -526,12 +569,119 @@
     2 Graphics Pipeline
   </a>
   
+    <nav class="md-nav" aria-label="2 Graphics Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shader-programs" class="md-nav__link">
+    Shader Programs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-texture-mapping" class="md-nav__link">
+    3 Texture Mapping 纹理映射
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Texture Mapping 纹理映射">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-barycentric-coordinates" class="md-nav__link">
+    3.1 Barycentric Coordinates 重心坐标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-texture-magnification" class="md-nav__link">
+    3.2 Texture Magnification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-texture-queries" class="md-nav__link">
+    3.3 Texture Queries
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Texture Queries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mipmap" class="md-nav__link">
+    Mipmap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-applications" class="md-nav__link">
+    4 Applications
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-map" class="md-nav__link">
+    Environment Map 环境光照
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bump-mapping" class="md-nav__link">
+    Bump Mapping 法线 贴图
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../geometry/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 Geometry
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -584,19 +734,26 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-blinn-phong-reflectance-model" class="md-nav__link">
-    1 Blinn-Phong Reflectance Model
+  <a href="#11-blinn-phong-reflectance-model" class="md-nav__link">
+    1.1 Blinn-Phong Reflectance Model
   </a>
   
-    <nav class="md-nav" aria-label="1 Blinn-Phong Reflectance Model">
+    <nav class="md-nav" aria-label="1.1 Blinn-Phong Reflectance Model">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#diffuse-reflection" class="md-nav__link">
-    Diffuse Reflection
+  <a href="#111-specular-termbliin-phong" class="md-nav__link">
+    1.1.1 Specular Term(Bliin-Phong)
   </a>
   
-    <nav class="md-nav" aria-label="Diffuse Reflection">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-diffuse-reflection" class="md-nav__link">
+    1.1.2 Diffuse Reflection
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1.2 Diffuse Reflection">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -625,6 +782,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#113-ambient-term" class="md-nav__link">
+    1.1.3 Ambient Term
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-shading-frequency" class="md-nav__link">
+    1.2 Shading Frequency 着色频率
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Shading Frequency 着色频率">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-vertex-normal-vectors" class="md-nav__link">
+    Per-Vertex Normal Vectors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#per-pixel-normal-vectors" class="md-nav__link">
+    Per-Pixel Normal Vectors
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -639,6 +830,93 @@
   <a href="#2-graphics-pipeline" class="md-nav__link">
     2 Graphics Pipeline
   </a>
+  
+    <nav class="md-nav" aria-label="2 Graphics Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shader-programs" class="md-nav__link">
+    Shader Programs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-texture-mapping" class="md-nav__link">
+    3 Texture Mapping 纹理映射
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Texture Mapping 纹理映射">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-barycentric-coordinates" class="md-nav__link">
+    3.1 Barycentric Coordinates 重心坐标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-texture-magnification" class="md-nav__link">
+    3.2 Texture Magnification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-texture-queries" class="md-nav__link">
+    3.3 Texture Queries
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Texture Queries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mipmap" class="md-nav__link">
+    Mipmap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-applications" class="md-nav__link">
+    4 Applications
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-map" class="md-nav__link">
+    Environment Map 环境光照
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bump-mapping" class="md-nav__link">
+    Bump Mapping 法线 贴图
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -683,14 +961,50 @@
 </li>
 </ul>
 <h2 id="1-illumination-shading">1 Illumination &amp; Shading</h2>
-<h3 id="1-blinn-phong-reflectance-model">1 Blinn-Phong Reflectance Model</h3>
+<h3 id="11-blinn-phong-reflectance-model">1.1 Blinn-Phong Reflectance Model</h3>
 <p>单一光源对物体表面照明的效果可以分为三个部分：</p>
 <ul>
 <li>高光 Specular Highlights</li>
 <li>漫反射 Diffuse Reflection</li>
 <li>环境光照 Ambient Lighting</li>
 </ul>
-<h4 id="diffuse-reflection">Diffuse Reflection</h4>
+<p>将以上三项相加，即可得到 Blinn-Phong 反射模型的结果，即：</p>
+<div class="arithmatex">\[
+\begin{align*}
+L &amp;= L_a + L_d + L_s \\
+&amp;= k_aI_a + k_d\frac{I}{r^2}\max(0,\vec{n}\cdot\vec{l})+k_s\frac{I}{r^2}\max(0,\vec{n}\cdot\vec{h})^p
+\end{align*}
+\]</div>
+<h4 id="111-specular-termbliin-phong">1.1.1 Specular Term(Bliin-Phong)</h4>
+<ul>
+<li>
+<p>比较 <em>光滑</em> 的物品才具有高光 =&gt; 接近于 <em>镜面反射</em></p>
+</li>
+<li>
+<p>当 观察角度 接近于 (镜面)反射角度 时，才能观测到高光 &lt;=&gt; 法线近似于角平分线</p>
+<p>记 <em>半程向量(角平分线)</em> 方向为 <span class="arithmatex">\(\vec{h}\)</span>，我们可以列出：</p>
+<div class="arithmatex">\[
+\vec{h} = \text{bisector}(\vec{v},\vec{l}) = \frac{\vec{v}+\vec{l}}{\|\vec{v}+\vec{l}\|}
+\]</div>
+<blockquote>
+<p>当 <span class="arithmatex">\(\vec{h} \rightarrow \vec{n} \Rightarrow \vec{v} \rightarrow \vec{R}\)</span>，即角平分线接近法线时，观测方向也接近出射方向 <span class="arithmatex">\(\vec{R}\)</span></p>
+</blockquote>
+</li>
+</ul>
+<p>记 <span class="arithmatex">\(\vec{n}\)</span> 与 <span class="arithmatex">\(\vec{h}\)</span> 之间的夹角大小为 <span class="arithmatex">\(\alpha\)</span> ，我们可以列出 specularly reflected light <span class="arithmatex">\(L_s\)</span> 的公式：</p>
+<p>$$
+L_s = k_s \left(\frac{I}{r^2}\right)\max\left(0,cos\alpha\right)^p 
+= k_s \left(\frac{I}{r^2}\right)\max\left(0,\vec{n} \cdot \vec{h}\right)^p
+$$
+其中：</p>
+<ul>
+<li><span class="arithmatex">\(k_s\)</span> 为 specular coefficient</li>
+<li>由于 <span class="arithmatex">\(cos\)</span> 函数的变化过于平缓，我们使用 <span class="arithmatex">\(p\)</span> 次方实现骤降以贴合实际（一般取 <span class="arithmatex">\([100,200]\)</span>）</li>
+</ul>
+<blockquote>
+<p>Blinn-Phong 模型简化了镜面反射中被吸收的部分能量</p>
+</blockquote>
+<h4 id="112-diffuse-reflection">1.1.2 Diffuse Reflection</h4>
 <blockquote>
 <p>光线被 <em>均匀</em> 的反射至各个方向</p>
 </blockquote>
@@ -726,7 +1040,7 @@ L_d = k_d\left(\frac{I}{r^2}\right)\max\left(0,\vec{n}\cdot\vec{l}\right)
 <p>其中：</p>
 <ul>
 <li>
-<p><span class="arithmatex">\(k_d\)</span> 为 diffuse coefficient，表示 color </p>
+<p><span class="arithmatex">\(k_d\)</span> 为 diffuse coefficient，间接反映了物体的 color </p>
 <p>=&gt; shading point 的颜色决定了表面会 <em>吸收</em> 多少能量</p>
 </li>
 <li>
@@ -741,7 +1055,266 @@ L_d = k_d\left(\frac{I}{r^2}\right)\max\left(0,\vec{n}\cdot\vec{l}\right)
 <div class="admonition tip">
 <p class="admonition-title">由于漫反射向各个方向散布的能量大小是一致的，所以观测结果与 <em>观测方向无关</em></p>
 </div>
+<h4 id="113-ambient-term">1.1.3 Ambient Term</h4>
+<p>我们认为 <strong>所有 shading point 接受的环境光照都是<u>相同的</u></strong>，记为 <span class="arithmatex">\(I_a\)</span>。</p>
+<p>对于不同颜色的 shading point，我们可以列出 reflected ambient light <span class="arithmatex">\(L_a\)</span> 的方程：</p>
+<div class="arithmatex">\[
+L_a = k_a \cdot I_a,\ k_a\text{ is ambient coefficient}
+\]</div>
+<h3 id="12-shading-frequency">1.2 Shading Frequency 着色频率</h3>
+<p><img alt="截屏2023-10-23 20.42.16.png" src="https://img1.imgtp.com/2023/10/23/RxJSosKX.png" /></p>
+<p>上图中自左向右分别为：</p>
+<ul>
+<li>Flat Shading：以 <em>面</em> 为单位进行 shading</li>
+<li>Gouraud Shading：对于 <em>面的每个顶点</em> 进行 shading，三角形内部进行插值</li>
+<li>Phong Shading：以 <em>像素</em> 为单位进行 shading</li>
+</ul>
+<p>但 Flat Shading 的效果不一定很差 =&gt; 当面片数量较多时，我们运用这种简单的方法也能取得较好的结果</p>
+<blockquote>
+<p>但是 Phong Shading 的效果一定有保证 hhh</p>
+</blockquote>
+<p><img alt="截屏2023-10-23 20.50.18.png" src="https://img1.imgtp.com/2023/10/23/qxx8XoTz.png" /></p>
+<h4 id="per-vertex-normal-vectors">Per-Vertex Normal Vectors</h4>
+<blockquote>
+<p>顶点法线方向计算</p>
+</blockquote>
+<ul>
+<li>
+<p>Best to get vertex normals from the <em>underlying geometry</em></p>
+<p>当我们用三角面片去拟合一个球体时，我们可以忽略三角形直接看球体方程</p>
+</li>
+<li>
+<p>Otherwise has to <em>infer</em> vertex normals from triangle faces</p>
+<p><em>Average surrounding</em> face normals：相邻面片法线的平均值</p>
+<div class="arithmatex">\[
+N_v =\frac{\sum_i N_i}{\|\sum_iN_i\|}
+\]</div>
+<p>优化：考虑面片面积的贡献 =&gt; 按面积加权平均</p>
+</li>
+</ul>
+<h4 id="per-pixel-normal-vectors">Per-Pixel Normal Vectors</h4>
+<blockquote>
+<p>在已知 vertex 法线的前提下，得到三角形内部平滑过渡的逐像素法线</p>
+</blockquote>
+<p>使用 重心坐标 barycentric interpolation 对 vertex normals 进行插值</p>
 <h2 id="2-graphics-pipeline">2 Graphics Pipeline</h2>
+<blockquote>
+<p>描述如何处理场景并形成渲染图的过程（一系列操作）</p>
+</blockquote>
+<p><img alt="截屏2023-10-23 21.51.59.png" src="https://img1.imgtp.com/2023/10/23/n7dOodCG.png" /></p>
+<h3 id="shader-programs">Shader Programs</h3>
+<p>我们可以自定义 Shader 规定 GPU 在 Vertex Processing / Fragment Processing 部分的着色行为（逐 顶点 / 像素 着色）</p>
+<ul>
+<li>Shader 会根据定义在 vertex / pixel 上执行 <em>一次</em>，是一个通用程序</li>
+</ul>
+<div class="highlight"><span class="filename">GLSL Shader - 如何计算像素的颜色</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">uniform</span><span class="w"> </span><span class="n">sampler2D</span><span class="w"> </span><span class="n">myTexture</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">uniform</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="n">lightDir</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">varying</span><span class="w"> </span><span class="n">vec2</span><span class="w"> </span><span class="n">uv</span><span class="p">;</span><span class="w">      </span><span class="c1">// 由 rasterizer 生成：per fragment</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">varying</span><span class="w"> </span><span class="n">vec3</span><span class="w"> </span><span class="n">norm</span><span class="p">;</span><span class="w">    </span><span class="c1">// 由 rasterizer 生成：per fragment</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">diffuseShader</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">vec3</span><span class="w"> </span><span class="n">kd</span><span class="p">;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">kd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">texture2d</span><span class="p">(</span><span class="n">myTexture</span><span class="p">,</span><span class="w"> </span><span class="n">uv</span><span class="p">);</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">kd</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">clamp</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="o">-</span><span class="n">lightDir</span><span class="p">,</span><span class="w"> </span><span class="n">norm</span><span class="p">),</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span><span class="w"> </span><span class="c1">// Lambertian Model</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">gl_FragColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec4</span><span class="p">(</span><span class="n">kd</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span><span class="w">                </span><span class="c1">// 返回 color</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="3-texture-mapping">3 Texture Mapping 纹理映射</h2>
+<blockquote>
+<p>纹理：定义任何一个点具备的不同属性</p>
+</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Surfaces are 2D -&gt; 把三维物体的表皮展开为平面</p>
+</div>
+<ul>
+<li>
+<p>（贴图）我们将纹理作为一张平面图，只要描述 3D Model 表面 与 2D Texture 的映射关系即可</p>
+</li>
+<li>
+<p>我们使用坐标 <span class="arithmatex">\((u,v)\)</span> 来描述每一个三角形顶点在 texture 上的坐标</p>
+<blockquote>
+<p>整个 U-V 坐标系一般处于 <span class="arithmatex">\([0,1]^2\)</span> 范围内</p>
+</blockquote>
+<p><img alt="截屏2023-10-23 22.22.00.png" src="https://img1.imgtp.com/2023/10/23/6tMpQy10.png" /></p>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">（贴瓷砖）Textures can be used MULTIPLE times ! </p>
+</div>
+<h3 id="31-barycentric-coordinates">3.1 Barycentric Coordinates 重心坐标</h3>
+<blockquote>
+<p>如何在三角形内部对 <em>任意属性</em> 进行平滑插值？</p>
+</blockquote>
+<ul>
+<li>
+<p>坐标系定义</p>
+<p>平面 <span class="arithmatex">\(ABC\)</span> 内 <em>任意一点</em> 均可表示为三角形顶点 <span class="arithmatex">\(A,B,C\)</span> 坐标的 <u>线性组合</u> <span class="arithmatex">\((\alpha,\beta,\gamma)\)</span></p>
+<p><img alt="截屏2023-10-23 22.31.45.png" src="https://img1.imgtp.com/2023/10/23/IAtXnfOF.png" /></p>
+<blockquote>
+<p>因为 <span class="arithmatex">\(\alpha + \beta + \gamma = 1\)</span> ，所以实际上只有两个未知数（对应二维平面）</p>
+</blockquote>
+</li>
+<li>
+<p>通过面积比求解 <span class="arithmatex">\((\alpha,\beta,\gamma)\)</span></p>
+<p><img alt="截屏2023-10-23 22.37.37.png" src="https://img1.imgtp.com/2023/10/23/ABZCe2cM.png" />
+显然，三角形重心 <span class="arithmatex">\(O\)</span> 的重心坐标为 <span class="arithmatex">\((\frac{1}{3},\frac{1}{3},\frac{1}{3})\)</span></p>
+</li>
+<li>
+<p>一般表达式</p>
+<div class="arithmatex">\[
+\begin{align*}
+\alpha &amp;= \frac{-(x-x_B)(y_C-y_B) + (y-y_B)(x_C-x_B)}{-(x_A-x_B)(y_C-y_B) + (y_A-y_B)(x_C-x_B)} \\
+\beta &amp;= \frac{-(x-x_C)(y_A-y_C) + (y-y_C)(x_A-x_C)}{-(x_B-x_C)(y_A-y_C) + (y_B-y_C)(x_A-x_C)}\\
+\gamma &amp; = 1 - \alpha - \beta
+\end{align*}
+\]</div>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">使用重心坐标对三个顶点的属性进行线性组合，即可得到平滑的插值</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Projection 可能导致重心坐标变化</p>
+</div>
+<h3 id="32-texture-magnification">3.2 Texture Magnification</h3>
+<div class="admonition question">
+<p class="admonition-title">What if the texture is too SMALL ?</p>
+</div>
+<p>这回导致我们返回 texture 中查询的坐标 <em>不是整数</em>，尝试通过一些简单的方式解决：</p>
+<ul>
+<li>Nearest：简单的四舍五入</li>
+<li>
+<p>Bilinear 双线性插值：考虑边上的 4 个 texel，在 水平/竖直 方向做两轮插值</p>
+<p><img alt="截屏2023-10-23 22.56.07.png" src="https://img1.imgtp.com/2023/10/23/VeCseWYe.png" />
+- Bicubic 双三次插值：考虑边上的 16 个点</p>
+</li>
+</ul>
+<h3 id="33-texture-queries">3.3 Texture Queries</h3>
+<div class="admonition question">
+<p class="admonition-title">What if the texture is too LARGE ?</p>
+</div>
+<blockquote>
+<p>事实上纹理大了的效果会更抽象（近处锯齿 + 远处摩尔纹）</p>
+</blockquote>
+<ul>
+<li><em>较近</em> 的像素在 texture space 中对应了 <em>较小</em> 的一块区域，此时使用区域 <em>中心</em> 对色彩进行近似没有太大的问题</li>
+<li>但对于 <em>较远</em> 像素来说，使用局部概括整体显然是不够妥当的</li>
+</ul>
+<blockquote>
+<p>=&gt; Supersampling 可以解决走样问题，但是开销太大了 orz</p>
+</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">采样引发了走样，要不就 <em>不采样</em> 了？</p>
+</div>
+<p>不如从 Point Query 转变为 Range(avg) Query 吧！</p>
+<h4 id="mipmap">Mipmap</h4>
+<blockquote>
+<p>Range Query 应该支持对 <em>任意大小</em> 区域的快速（近似）查询</p>
+</blockquote>
+<p>Mipmap 仅支持对<em>方形区域</em>进行查询：</p>
+<ul>
+<li>预先算好一串的 Range Query 结果（每次分辨率折半）</li>
+<li>只比原图增加了 <span class="arithmatex">\(\frac{1}{3}\)</span> 的存储开销</li>
+</ul>
+<p><img alt="截屏2023-10-23 23.14.14.png" src="https://img1.imgtp.com/2023/10/23/9OrfaZWQ.png" /></p>
+<ul>
+<li>
+<p>Range Size 的计算：</p>
+<ol>
+<li>把目标像素周围的几个像素一起映射到 texture space</li>
+<li>根据 右侧 &amp; 上侧 投影结果的 <em>最大距离</em> 作为方形区域边长 <span class="arithmatex">\(L\)</span>，并决定 range size</li>
+<li>查询第 <span class="arithmatex">\(log(L)\)</span> 张 mipmap =&gt; 方形区域在这一层上对应 1 pixel</li>
+</ol>
+<p><img alt="截屏2023-10-23 23.19.19.png" src="https://img1.imgtp.com/2023/10/23/c7IsjVbk.png" /></p>
+</li>
+<li>
+<p>Trilinear Interpolation 三线性插值</p>
+<blockquote>
+<p>使用插值解决对非整数层的查询)</p>
+</blockquote>
+<p>当我们尝试查询第 <span class="arithmatex">\(N.x\)</span> 层时：</p>
+<ol>
+<li>查询第 <span class="arithmatex">\(N,\ N+1\)</span> 层，并分别对结果进行双线性插值</li>
+<li>对两层的插值结果再做一次插值</li>
+</ol>
+</li>
+<li>
+<p>Anisotropic Filtering 各向异性过滤 </p>
+<p>使用 Mipmap 会在 <em>远处</em> 的像素会产生 Overblur</p>
+<ul>
+<li>Mipmap 忽视了长宽比并非 1:1 的压缩情况，只考虑了 squre</li>
+<li>然而 1 pixel 映射得到的区域往往不是方正的，甚至可能是一个倾斜的矩形</li>
+</ul>
+<p>使用 各项异性过滤 可以部分解决 Mipmap 的部分问题 =&gt; 允许查询矩形区域（但不能查询倾斜区域）</p>
+<p>开销是原图的 <span class="arithmatex">\(3\)</span> 倍</p>
+</li>
+<li>
+<p>EWA Filtering</p>
+<p>将区域拆分成若干个椭圆，使得查询区域更好的覆盖映射区域</p>
+<p>但多次查询会导致更大的开销 orz</p>
+</li>
+</ul>
+<h2 id="4-applications">4 Applications</h2>
+<p>In modern GPUs, <code>texture</code> = Memory + Range Query(Filtering)</p>
+<blockquote>
+<p>纹理是内存上的一块数据，而不局限于一张“图片”</p>
+</blockquote>
+<p>我们可以用它来表示更多的东西 ...</p>
+<h3 id="environment-map">Environment Map 环境光照</h3>
+<p>也可以叫"环境贴图"，用于描述来自各个方向的光线信息</p>
+<ul>
+<li>
+<p>我们假设环境光均来自于 <em>无限远处</em> =&gt; 只要记录方向就 ok 啦</p>
+</li>
+<li>
+<p>Spherical Map：信息可以记录在 <em>球面</em> 上</p>
+<ul>
+<li>拉开成一张矩形图 =&gt; 扭曲的一张图</li>
+<li>Cube Map：拉开成一个(外接) ，对应点与球心连线和方盒相交处 =&gt; 不那么扭的六张图，但需要判断点在哪一个面上</li>
+</ul>
+</li>
+</ul>
+<h3 id="bump-mapping">Bump Mapping 法线 贴图</h3>
+<p>我们可以用纹理定义点与平面的相对高度（like 橘子皮）</p>
+<p>在原本的几何体上增加很多假的法线，从而影响着色结果</p>
+<blockquote>
+<p>冬枣不会变成核桃，只是 “看上去” 皱巴巴</p>
+</blockquote>
+<ul>
+<li>
+<p>考虑 平面(flatland) 的情况：</p>
+<ul>
+<li>原始的表面法线 <span class="arithmatex">\(n(p) = (0,1)\)</span> ，垂直表面向上</li>
+<li>假设贴图函数为 <span class="arithmatex">\(h(x)\)</span>，我们认为此处的差分为 <span class="arithmatex">\(dp = c \cdot [h(p+1) - h(p)]\)</span> =&gt; 该点的 <em>切线</em> 方向为 <span class="arithmatex">\((1, dp)\)</span></li>
+<li>新的法线于切线垂直，为 <span class="arithmatex">\(\text{normalized}(-dp, 1)\)</span></li>
+</ul>
+</li>
+<li>
+<p>考虑 3D 的情况：</p>
+<ul>
+<li>原始法线为 <span class="arithmatex">\((0,0,1)\)</span></li>
+<li>
+<p>纹理有 <span class="arithmatex">\((u,v)\)</span> 两个维度，此处也对应了两个差分</p>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{dp}{du} &amp;= c_1 \cdot [h(u+1) - h(u)] \\
+    \frac{dp}{dv} &amp;= c_2 \cdot [h(v+1) - h(v)]
+\end{align*}
+\]</div>
+</li>
+<li>
+<p>新的法线为 <span class="arithmatex">\(\text{normalized}(-\frac{dp}{du},-\frac{dp}{dv})\)</span></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>实际上原始的表面法线并不一定是 <span class="arithmatex">\((0,0,1)\)</span>，但我们可以通过定义 local coordinate 来解决</p>
+<p>虽然需要进行坐标变换 orz</p>
+</blockquote>
+<div class="admonition info">
+<p class="admonition-title">Bump Mapping 并没有真正移动顶点（只是计算了假的法线）</br> Displacement Mapping 将真正挪动顶点并改变几何体（更加真实）</p>
+</div>
 
 
 
@@ -778,6 +1351,22 @@ L_d = k_d\left(\frac{I}{r^2}\right)\max\left(0,\vec{n}\cdot\vec{l}\right)
             </div>
           </a>
         
+        
+          
+          <a href="../geometry/" class="md-footer__link md-footer__link--next" aria-label="下一页: 4 Geometry">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                4 Geometry
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
