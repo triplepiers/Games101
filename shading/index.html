@@ -247,20 +247,87 @@
         
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../transformation/" class="md-tabs__link">
+        
+  
     
   
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../transformation/" class="md-tabs__link">
-          
-  
-  Notes
+  1 Transformation
 
-        </a>
-      </li>
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../rasterization/" class="md-tabs__link">
+        
+  
     
+  
+  2 Rasterization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  3 Shading
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../geometry/" class="md-tabs__link">
+        
+  
+    
+  
+  4 Geometry
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ray/" class="md-tabs__link">
+        
+  
+    
+  
+  5 Ray Tracing
+
+      </a>
+    </li>
   
 
       
@@ -332,47 +399,6 @@
       
   
   
-    
-  
-  
-    
-    
-    
-    
-    
-      
-      
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-            
-  
-  <span class="md-ellipsis">
-    Notes
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Notes
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
   
     <li class="md-nav__item">
       <a href="../transformation/" class="md-nav__link">
@@ -387,10 +413,9 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
   
@@ -407,10 +432,9 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
     
@@ -658,6 +682,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5-shadow-mapping" class="md-nav__link">
+    5 Shadow Mapping
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -665,10 +696,9 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
   
@@ -685,11 +715,22 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
+    
       
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ray/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 Ray Tracing
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -917,6 +958,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-shadow-mapping" class="md-nav__link">
+    5 Shadow Mapping
+  </a>
   
 </li>
       
@@ -1315,6 +1363,52 @@ N_v =\frac{\sum_i N_i}{\|\sum_iN_i\|}
 <div class="admonition info">
 <p class="admonition-title">Bump Mapping 并没有真正移动顶点（只是计算了假的法线）</br> Displacement Mapping 将真正挪动顶点并改变几何体（更加真实）</p>
 </div>
+<h2 id="5-shadow-mapping">5 Shadow Mapping</h2>
+<p>Shadow Mapping 被应用在 Image Space（生成阴影不需要知道场景的几何信息）</p>
+<ul>
+<li>缺陷<ul>
+<li>只能用于之所 Hard Shadows</li>
+<li>Shadow Map 的分辨率问题可能导致走样</li>
+<li>在比较深度时，浮点数的精度问题可能导致误差</li>
+</ul>
+</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Hard Shadow &amp; Soft Shadow</p>
+<ul>
+<li>Hard Shadow：非黑即白</li>
+<li>Soft Shadow：具有透明度<ul>
+<li>Umbra 本影区域全黑</li>
+<li>Penumbra 半影区域具有不同的透明度（部分可见）</li>
+</ul>
+</li>
+</ul>
+</div>
+<ul>
+<li>
+<p>生成点光源下的硬阴影</p>
+<blockquote>
+<p>事实上只有 <em>拥有一定体积的光源</em> 才能产生软阴影，点光源只能产生硬阴影</p>
+</blockquote>
+<div class="admonition tip">
+<p class="admonition-title"><em>不在阴影</em> 中的点必须同时被 light &amp; camera 可视</p>
+</div>
+<ol>
+<li>
+<p>Render from Light：点是否被光源可视？</p>
+<p>使用 Depth Image 记录从光源出发所有 <em>可视</em> 点的最大深度（不进行着色）</p>
+</li>
+<li>
+<p>Render from Camera：从相机出发进行观测</p>
+<p>从相机出发，将可视点投影至 <em>光源平面</em> 并与 Depth Image 记录结果进行比较</p>
+<ul>
+<li>深度一致：该点可见</li>
+<li>深度更大：该点不 (被光源) 可见</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
 
 
 

@@ -14,6 +14,8 @@
         <link rel="prev" href="../shading/">
       
       
+        <link rel="next" href="../ray/">
+      
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
@@ -245,20 +247,87 @@
         
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../transformation/" class="md-tabs__link">
+        
+  
     
   
-  
-    
-    
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../transformation/" class="md-tabs__link">
-          
-  
-  Notes
+  1 Transformation
 
-        </a>
-      </li>
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../rasterization/" class="md-tabs__link">
+        
+  
     
+  
+  2 Rasterization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../shading/" class="md-tabs__link">
+        
+  
+    
+  
+  3 Shading
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  4 Geometry
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ray/" class="md-tabs__link">
+        
+  
+    
+  
+  5 Ray Tracing
+
+      </a>
+    </li>
   
 
       
@@ -330,47 +399,6 @@
       
   
   
-    
-  
-  
-    
-    
-    
-    
-    
-      
-      
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
-            
-  
-  <span class="md-ellipsis">
-    Notes
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Notes
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
   
     <li class="md-nav__item">
       <a href="../transformation/" class="md-nav__link">
@@ -385,10 +413,9 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
   
@@ -405,10 +432,9 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
   
@@ -425,10 +451,9 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
     
@@ -479,6 +504,140 @@
     1 Representations
   </a>
   
+    <nav class="md-nav" aria-label="1 Representations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implicit" class="md-nav__link">
+    Implicit 隐式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicit" class="md-nav__link">
+    Explicit 显式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-bezier-curves" class="md-nav__link">
+    2 Bezier Curves 贝赛尔曲线
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Bezier Curves 贝赛尔曲线">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#de-castelijau-algorithm" class="md-nav__link">
+    de Castelijau Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algebraic-formula" class="md-nav__link">
+    Algebraic Formula
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#piecewise" class="md-nav__link">
+    Piecewise 逐段
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-surfaces" class="md-nav__link">
+    3 Surfaces
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Surfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-bezier-surface" class="md-nav__link">
+    3.1 Bezier Surface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-mesh-operations" class="md-nav__link">
+    3.2 Mesh Operations
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Mesh Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subdivision" class="md-nav__link">
+    Subdivision 细分
+  </a>
+  
+    <nav class="md-nav" aria-label="Subdivision 细分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loop-subdivision" class="md-nav__link">
+    Loop Subdivision
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catmull-clark-subdivision" class="md-nav__link">
+    Catmull-Clark Subdivision
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simplification" class="md-nav__link">
+    Simplification
+  </a>
+  
+    <nav class="md-nav" aria-label="Simplification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quadric-error-metrics" class="md-nav__link">
+    Quadric Error Metrics 二次误差度量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -488,11 +647,22 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
+    
       
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ray/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 Ray Tracing
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -526,6 +696,140 @@
     1 Representations
   </a>
   
+    <nav class="md-nav" aria-label="1 Representations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implicit" class="md-nav__link">
+    Implicit 隐式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicit" class="md-nav__link">
+    Explicit 显式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-bezier-curves" class="md-nav__link">
+    2 Bezier Curves 贝赛尔曲线
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Bezier Curves 贝赛尔曲线">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#de-castelijau-algorithm" class="md-nav__link">
+    de Castelijau Algorithm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algebraic-formula" class="md-nav__link">
+    Algebraic Formula
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#piecewise" class="md-nav__link">
+    Piecewise 逐段
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-surfaces" class="md-nav__link">
+    3 Surfaces
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Surfaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-bezier-surface" class="md-nav__link">
+    3.1 Bezier Surface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-mesh-operations" class="md-nav__link">
+    3.2 Mesh Operations
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Mesh Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subdivision" class="md-nav__link">
+    Subdivision 细分
+  </a>
+  
+    <nav class="md-nav" aria-label="Subdivision 细分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loop-subdivision" class="md-nav__link">
+    Loop Subdivision
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catmull-clark-subdivision" class="md-nav__link">
+    Catmull-Clark Subdivision
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simplification" class="md-nav__link">
+    Simplification
+  </a>
+  
+    <nav class="md-nav" aria-label="Simplification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quadric-error-metrics" class="md-nav__link">
+    Quadric Error Metrics 二次误差度量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -549,9 +853,7 @@
   <h1>4 Geometry</h1>
 
 <h2 id="1-representations">1 Representations</h2>
-<ul>
-<li>
-<p>Implicit 隐式</p>
+<h3 id="implicit">Implicit 隐式</h3>
 <p>(三维)点坐标满足的关系： <span class="arithmatex">\(f(x,y,z) = 0\)</span></p>
 <blockquote>
 <p>比如球体方程 <span class="arithmatex">\(x^2 + y ^2 + z^2 = 1\)</span></p>
@@ -577,21 +879,255 @@
 <p>Fractals 分型</p>
 </li>
 </ul>
-</li>
-<li>
-<p>Explicit 显式</p>
+<h3 id="explicit">Explicit 显式</h3>
 <p>给出所有满足条件的(三维)点坐标 / 参数映射(Parameter Mapping)</p>
 <blockquote>
 <p>后者给你满足条件的 <span class="arithmatex">\((u,v)\)</span> 集合，并定义 <span class="arithmatex">\((u,v) \rightarrow (x,y,z)\)</span> 的映射关系</p>
 </blockquote>
 <p>难以判断给定点在几何体 <em>内外</em></p>
 <ul>
-<li>Point Cloud</li>
-<li>Polygon Mesh</li>
-<li>Subdivision, NURBS</li>
+<li>
+<p>Point Cloud 点云：list of points <span class="arithmatex">\((x,y,z)\)</span></p>
+<p>理论上可以表示任何几何体，但需要巨大的 dataset（<span class="arithmatex">\(\gt\)</span> 1 point / pixel）</p>
+<p>一般会把点变成 polygon mesh</p>
+</li>
+<li>
+<p>Polygon Mesh 多边形面片：三角形和四边形用的比较多</p>
+<ul>
+<li>
+<p><code>.obj</code> 文件格式：是一个文本文件</p>
+<p>分别记录了 vertices, normals, texture coordinates 以及 数据之间的关系（哪三个点构成三角形，用什么材质 ...）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Subdivision, NURBS</p>
+</li>
+</ul>
+<h2 id="2-bezier-curves">2 Bezier Curves 贝赛尔曲线</h2>
+<p>下面是贝塞尔曲线具备的一些性质：</p>
+<ul>
+<li>固定的起止位置：<span class="arithmatex">\(b(0) = b_0,\ b(1)=b_n\)</span></li>
+<li>固定的起止方向（系数针对 4 point的情况）：<span class="arithmatex">\(b'(0) = 3(b_1-b_0),\ b'(1)=3(b_3-b_2)\)</span></li>
+<li>对整个曲线仿射变换 &lt;=&gt; 对控制点仿射变换后重新绘制</li>
+<li>Convex Hull Property：最终得到的贝塞尔曲线一定在控制点形成的 <em>凸包内</em></li>
+</ul>
+<h4 id="de-castelijau-algorithm">de Castelijau Algorithm</h4>
+<p>考虑三个控制点的情况（生成的是 二次 quadratic 贝塞尔曲线）</p>
+<ul>
+<li>
+<p>曲线开始于 <span class="arithmatex">\(b_0\)</span>，结束于 <span class="arithmatex">\(b_2\)</span></p>
+</li>
+<li>
+<p>假设曲线是在 <span class="arithmatex">\(t \in [0,1]\)</span> 在空间中自 <span class="arithmatex">\(b_0\)</span> 漫游至 <span class="arithmatex">\(b_2\)</span> 的过程，对于时刻 <span class="arithmatex">\(t\)</span>：</p>
+<ul>
+<li>在两个线段 <span class="arithmatex">\(b_0b_1,\ b_1b_2\)</span> 上同时画出 <span class="arithmatex">\(t\)</span> 等分点 <span class="arithmatex">\(b_0^1,\ b_1^1\)</span></li>
+</ul>
+<blockquote>
+<p>满足 <span class="arithmatex">\(\frac{b_0b_0^1}{b_0^1b_1} = \frac{b_1b_1^1}{b_1^1b_2} = \frac{t}{1-t}\)</span></p>
+</blockquote>
+<ul>
+<li>寻找线段 <span class="arithmatex">\(b_0^1b_1^1\)</span> 的 <span class="arithmatex">\(t\)</span> 等分点 <span class="arithmatex">\(b_0^2\)</span> =&gt; 即位曲线在 <span class="arithmatex">\(t\)</span> 时刻所处的位置</li>
 </ul>
 </li>
 </ul>
+<div class="admonition info">
+<p class="admonition-title">四个控制点生成曲线的情况</p>
+<ul>
+<li>不过是多做几次线性插值</li>
+<li>使用 <span class="arithmatex">\(k\)</span> 个控制点时，需要 <span class="arithmatex">\(\sum_{i=1}^{k-1} i\)</span> 次线性插值确定一个点</li>
+</ul>
+<p><img alt="截屏2023-10-24 13.22.55.png" src="https://img1.imgtp.com/2023/10/24/cwkmUD9M.png" /></p>
+</div>
+<h4 id="algebraic-formula">Algebraic Formula</h4>
+<p>de Castelijau Algorithm 事实上生成了一系列 <em>金字塔状</em> 排布的 coefficient</p>
+<p><img alt="截屏2023-10-24 13.27.01.png" src="https://img1.imgtp.com/2023/10/24/UkGYSKl1.png" /></p>
+<p>考虑三个控制点的情况， <span class="arithmatex">\(t\)</span> 时刻位置 <span class="arithmatex">\(b_0^2\)</span> 可以表示为三个点的线性组合：</p>
+<div class="arithmatex">\[
+\left\{
+    \begin{align*}
+        b_0^1(t) &amp;= (1-t)b_0 + tb_1 \\
+        b_1^1(t) &amp;= (1-t)b_1 + tb_2 \\
+        b_0^2(t) &amp;= (1-t)b_0^1 + tb_1^1
+    \end{align*}
+\right. \Rightarrow b_0^2(t) = (1-t)^2b_0 + 2t(1-t)b_1 + t^2b_2
+\]</div>
+<p>考虑 General Case of order <span class="arithmatex">\(n\)</span>（ <span class="arithmatex">\(n+1\)</span> 个控制点）：</p>
+<p>$$
+b^n(t)=b_0^n(t)= \sum_{j=0}^n B_j^n(t) \cdot b_j
+$$
+其中：</p>
+<ul>
+<li><span class="arithmatex">\(b_j\)</span> 是 <span class="arithmatex">\(n+1\)</span> 个控制点</li>
+<li>
+<p><span class="arithmatex">\(B_j^n(t)\)</span> 是 Bernstein Polynomial（其实就是二项式定理）</p>
+<div class="arithmatex">\[
+B_j^n(t) = \left(
+    \begin{array}{1}
+    n\\j
+    \end{array}
+\right) t^j(1-t)^{n-j}
+\]</div>
+</li>
+</ul>
+<h4 id="piecewise">Piecewise 逐段</h4>
+<div class="admonition question">
+<p class="admonition-title">Higher-Order Bezier Curve 的效果并不好</p>
+<p>使用 100 个点定义一条曲线也没法让他变得特别扭曲</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">少量多次：将多条 Low-Order 贝塞尔曲线首位相连</p>
+<p>Piecewise Bezier Curve 就是逐段定义低阶贝塞尔曲线并对其进行拼接的技术（钢笔工具）</p>
+<ul>
+<li>使用四个控制点定义一段曲线（两个短柄）</li>
+<li>保证光滑过渡（将两个短柄移动至 共线 · 等长 的状态 =&gt; 导数连续）</li>
+</ul>
+</div>
+<ul>
+<li>
+<p>两段 Bezier Curve <span class="arithmatex">\([k,k+1]\ [k+1,+2]\)</span> 之间的连续性</p>
+<p>假设两段曲线的控制点分别为 <span class="arithmatex">\([a_0,a_n],\ [b_0,b_n]\)</span></p>
+<ul>
+<li>
+<p><span class="arithmatex">\(C^0\)</span> Continuity：上一段的终点是下一段的起点 <span class="arithmatex">\(a_n == b_0\)</span></p>
+<p>连是连上了，但可能是折线</p>
+</li>
+<li>
+<p><span class="arithmatex">\(C^1\)</span> Continuity：切线(一阶导)连续 <span class="arithmatex">\(a_n==b_0=\frac{1}{2}(a_{n-1}+b_1)\)</span></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-surfaces">3 Surfaces</h2>
+<h3 id="31-bezier-surface">3.1 Bezier Surface</h3>
+<p>使用了 4 x 4 个控制点，在 X,Y 方向上分别运用贝塞尔曲线确定坐标：</p>
+<ul>
+<li>四组控制点各自形成了 4 条 贝塞尔曲线</li>
+<li>
+<p>在 t 时刻，我们四条曲线与平面 <span class="arithmatex">\(x = t\)</span> 存在四个交点，构成了另一条贝塞尔曲线</p>
+<p>=&gt; <span class="arithmatex">\(t\in[0,1]\)</span> 上的各条曲线相连便得到了曲面</p>
+</li>
+</ul>
+<h3 id="32-mesh-operations">3.2 Mesh Operations</h3>
+<blockquote>
+<p>三角面片涉及的几何处理</p>
+</blockquote>
+<ul>
+<li>Subdivision 细分：使用更多的面片可以得到更贴合的模型 (upsampling)</li>
+<li>Simplification 简化：更少的面可以节省存储空间 (downsampling)</li>
+<li>Regularization 正规化：把面片变换的接近正三角形 (modify distribution to improve quality)</li>
+</ul>
+<h4 id="subdivision">Subdivision 细分</h4>
+<p>首先创造更多的三角形，然后改变他们的位置让模型更平滑</p>
+<h5 id="loop-subdivision">Loop Subdivision</h5>
+<ul>
+<li>连接三角形三边的中点，你就能得到四个小三角形</li>
+<li>
+<p>对新旧顶点应用不同的位置更新规则：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Type</th>
+<th style="text-align: left;">Rule</th>
+<th style="text-align: center;">Pic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">New Vertex</td>
+<td style="text-align: left;">白色点调整至 <span class="arithmatex">\(\frac{3}{8}(A+B) + \frac{1}{8}(C+D)\)</span></td>
+<td style="text-align: center;"><img src="https://img1.imgtp.com/2023/10/24/XmS5eESA.png" style="height:200px;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">Old Vertex</td>
+<td style="text-align: left;">白色点调整至 <span class="arithmatex">\((1-n*u) \cdot original\_pos + u \cdot \sum(neighbor\_pos)\)</span> </br> - <span class="arithmatex">\(n\)</span> 为 vertex degree </br> - 若 n = 3，则 u = <span class="arithmatex">\(\frac{3}{16}\)</span>，否则 u = <span class="arithmatex">\(\frac{3}{8n}\)</span></td>
+<td style="text-align: center;"><img src="https://img1.imgtp.com/2023/10/24/cVXLWn6c.png" style="height:200px;"></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h5 id="catmull-clark-subdivision">Catmull-Clark Subdivision</h5>
+<blockquote>
+<p>适用于 General Mesh 的情况（面片并不全是三角形）</p>
+</blockquote>
+<ul>
+<li>
+<p>定义</p>
+<ul>
+<li>Non-quad face 三角形面片</li>
+<li>Extraordinary Vertex 奇异点：<span class="arithmatex">\(\text{degree} \neq 4\)</span> 的顶点</li>
+</ul>
+</li>
+<li>
+<p>过程</p>
+<ul>
+<li>取每条边的中点 &amp; 每个面的重心（中点）</li>
+<li>连接这些点</li>
+</ul>
+</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">经过一次划分后，现在有多少个奇异点？</p>
+<p><span class="arithmatex">\(n' = n + n_{triangle}\)</span> </p>
+<ul>
+<li>原本的奇异点仍然是奇异点(degree = 5)</li>
+<li>三角心重心是新增的奇异点(degree = 3)</li>
+</ul>
+</div>
+<div class="admonition info">
+<p class="admonition-title">此时已经 <em>没有</em> Non-quad Face 了</p>
+<p>所有的三角形面片都被划分为了 3 * 四边形面片</p>
+<p>=&gt; 之后的所有细分操作将 <em>不再增加</em> 奇异点的数量</p>
+</div>
+<ul>
+<li>
+<p>顶点位置更新策略</p>
+<ul>
+<li>
+<p>Face Point：位于面片中间的点 <span class="arithmatex">\(f\)</span></p>
+<p>记面片的四个顶点为 <span class="arithmatex">\((v_1,v_4)\)</span>，我们令 <span class="arithmatex">\(f = \frac{v_1+v_2+v_3+v_4}{4}\)</span></p>
+</li>
+<li>
+<p>Edge Point：面片边缘上的点 <span class="arithmatex">\(e\)</span></p>
+<p>考虑该边的两个端点 <span class="arithmatex">\(v_1,\ v_2\)</span> 以及相邻两个面片的 face points <span class="arithmatex">\(f_1,\ f_2\)</span></p>
+<p>我们令 <span class="arithmatex">\(e = \frac{v_1+v_2+f_1+f_2}{4}\)</span></p>
+</li>
+<li>
+<p>(Old) Vertex Point</p>
+</li>
+</ul>
+<p><img alt="截屏2023-10-24 15.23.50.png" src="https://img1.imgtp.com/2023/10/24/UOZiegBg.png" /></p>
+<h4 id="simplification">Simplification</h4>
+</li>
+</ul>
+<p>使用 边坍缩 Edge Collapsing 进行简化</p>
+<p><img alt="截屏2023-10-24 15.31.04.png" src="https://img1.imgtp.com/2023/10/24/KqDgMh9N.png" /></p>
+<h5 id="quadric-error-metrics">Quadric Error Metrics 二次误差度量</h5>
+<p><img alt="截屏2023-10-24 15.32.49.png" src="https://img1.imgtp.com/2023/10/24/FBBSKhgC.png" /></p>
+<blockquote>
+<p>我们尝试使用蓝色的三角形来取代原本的灰色多边形 =&gt; 顶点放在哪里？</p>
+</blockquote>
+<ul>
+<li>左侧是将顶点置于上方三个顶点的 <em>local average</em> 的结果（太平啦）</li>
+<li>
+<p>右侧是将点置于二次误差最小化位置的结果</p>
+<p>到四条虚线距离平方和最小的位置</p>
+</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">如何选择需要坍缩的边？</p>
+<p>Iteratively：每次坍缩二次误差最小的边</p>
+<ul>
+<li>
+<p>坍缩一条边会引起边上其他边的二次误差变化 =&gt; 需要 Update</p>
+<p>使用 Heap / Priority Queue 作为存储结构（每次取最小 + 更新）</p>
+</li>
+<li>
+<p>这是一种贪心算法（不能确保全局最优）</p>
+</li>
+</ul>
+</div>
 
 
 
@@ -628,6 +1164,22 @@
             </div>
           </a>
         
+        
+          
+          <a href="../ray/" class="md-footer__link md-footer__link--next" aria-label="下一页: 5 Ray Tracing">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                5 Ray Tracing
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
